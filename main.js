@@ -28,17 +28,19 @@ playBtn.addEventListener('click', function() {
 
     // create a new square with the valid number and selected level
     const currentSquare = newSquare(newValidNumber, selectedLevel, bombIndices);
-    if (currentSquare.classList.contains("bomb")) {
-        currentSquare.addEventListener('click', function() {
-            // show game over message
-            gridDom.innerHTML = '';
-        });
-    } else {
-        currentSquare.addEventListener('click', function() {
-            // toggle the 'clicked' class of the current square when clicked
-            this.classList.toggle('clicked');
-        });
-    }
+    currentSquare.addEventListener('click', function() {
+        // toggle the 'clicked' class of the current square when clicked
+        this.classList.toggle('clicked');
+    
+        // check if the current square contains the bomb class
+        if (this.classList.contains('bomb')) {
+            // change the background color of all squares with the bomb class to red
+            const bombs = document.querySelectorAll('.bomb');
+            for (let i = 0; i < bombs.length; i++) {
+                bombs[i].style.backgroundColor = 'red';
+            }
+        }
+    });
 
     // add the current square to the grid container
     gridDom.append(currentSquare);
