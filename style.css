@@ -1,0 +1,93 @@
+/* GENERAL STYLE */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Martian Mono', monospace;
+}
+
+body {
+    background-color: #070950;
+}
+
+/* HEADER STYLE */
+header {
+    height: 60px;
+    padding: 0 24px;
+    margin-bottom: 24px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header img {
+    height: 60px;
+}
+
+#myTitle {
+    display: flex;
+    align-items: center;
+}
+
+#playBtn {
+    padding: 4px 8px;
+}
+
+/* MAIN STYLE */
+
+#gridContainer {
+    width: 640px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.square {
+    width: calc(640px / 10);
+    height: calc(640px / 10);
+    border: 2px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.square.square-81  {
+    width: calc(640px / 9);
+    height: calc(640px / 9);
+}
+
+.square.square-49 {
+    width: calc(640px / 7);
+    height: calc(640px / 7);
+}
+
+.square.clicked {
+    background-color: #9632B3;
+}
+
+/* FOOTER STYLE */
+footer {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    background-color: white;
+    font-size: 20px;
+}
+
+footer i {
+    font-size: 20px;
+    color: black;
+}
+
+footer a {
+    text-decoration: none;
+}
+
+footer:hover i {
+    color: red;
+}
