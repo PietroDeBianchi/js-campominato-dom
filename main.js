@@ -3,42 +3,57 @@ const playBtn = document.getElementById("playBtn");
 let blacklistNumber = [];
 
 playBtn.addEventListener('click', function() {
-    // get the value of the selected level option. In this case the value attribute of the option tag with value="100" is set to the string "100". When the user selects this option, the value of the select element with id "yourlevel" is set to the value of the selected option, which is the string "100". This value is retrieved in JavaScript using the value property.
+    // get the value of the selected level option
     const selectedLevel = document.getElementById("yourlevel").value;
     // clear the existing squares
     gridDom.innerHTML = '';
     // reset the blacklist array
     blacklistNumber = [];
-
+  
+    // randomly select 16 unique numbers to be bombs
+    const bombIndices = [];
+    while (bombIndices.length < 16) {
+      const randomNumber = uniqueRandomNumber(blacklistNumber, 1, selectedLevel);
+      if (!bombIndices.includes(randomNumber)) {
+        bombIndices.push(randomNumber);
+      }
+    }
+  
     // create squares based on selected level
     for (let i = 0; i < selectedLevel; i++) {
-        // generate a new valid number for the current square
-        const newValidNumber = uniqueRandomNumber(blacklistNumber, 1, selectedLevel);
-        // add the new valid number to the blacklist array
-        blacklistNumber.push(newValidNumber);
-
-        // create a new square with the valid number and selected level
-        const currentSquare = newSquare(newValidNumber, selectedLevel);
-        currentSquare.addEventListener('click', function() {
-            // toggle the 'clicked' class of the current square when clicked
-            this.classList.toggle('clicked');
-        });
-
-        // add the current square to the grid container
-        gridDom.append(currentSquare);
+      // generate a new valid number for the current square
+      const newValidNumber = uniqueRandomNumber(blacklistNumber, 1, selectedLevel);
+      // add the new valid number to the blacklist array
+      blacklistNumber.push(newValidNumber);
+  
+      // create a new square with the valid number and selected level
+      const currentSquare = newSquare(newValidNumber, selectedLevel, bombIndices);
+      currentSquare.addEventListener('click', function() {
+        // toggle the 'clicked' class of the current square when clicked
+        this.classList.toggle('clicked');
+      });
+  
+      // add the current square to the grid container
+      gridDom.append(currentSquare);
     }
-});
+  });
+  
 
 // create a new square element with a given number and level
-function newSquare(number, level) {
+function newSquare(number, level, bombIndices) {
     const squareElement = document.createElement('div');
     squareElement.classList.add('square');
     squareElement.classList.add(`square-${level}`);
-
+  
     squareElement.innerHTML  = number;
-
+  
+    if (bombIndices.includes(number)) {
+      squareElement.classList.add('bomb');
+    }
+  
     return squareElement;
 }
+  
 
 // generate a new unique random number within a given range
 // and excluding numbers in the blacklist array
