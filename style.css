@@ -67,10 +67,6 @@ header img {
     background-color: #9632B3;
 }
 
-.square.clicked.bomb {
-    background-color: red;
-}
-
 /* FOOTER STYLE */
 footer {
     width: 100%;
